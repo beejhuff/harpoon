@@ -94,8 +94,8 @@ case "${command}" in
 	env:doc) ## [<task> | <service>] %% List available/exported environment variables
 		envdoc ;;
 
-	func) #todo List built-in functions
-		;;
+	func) ## [<task> | <service>] %% List built-in functions
+		funcdoc ;;
 
 	help) ## [<task> | <service>] %% ⁉️  Get help for a task or service
 		help ;;

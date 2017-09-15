@@ -50,6 +50,7 @@ else
 	export DOWN="Down"
 fi
 
+# @func speak %% <text> %% 💬  Speak text (macOS only)
 speak() {
 	if [[ $(uname) == 'Darwin' && ${HARPOON_SPEECH} == true ]]; then
 		local speech=$(echo -e "$1" | sed 's/\n//g')
@@ -57,6 +58,8 @@ speak() {
 	fi
 }
 
+# @func speakGreeting %% %% 💬  Greet the user (optionally with $GREETING)
+#% 🔺 GREETING %% Custom greeting message
 speakGreeting() {
 	if [[ -v GREETING && ! -v CI ]]; then
 		export HARPOON_SPEECH_RATE=225
@@ -71,6 +74,7 @@ speakGreeting() {
 	fi
 }
 
+# @func printInfo %% <info> %% 🖥  Print an informational message to the console
 printInfo() {
 	echo -e "${COLOR_PURPLE}${1}${COLOR_NC}${2:-}"
 }
@@ -81,11 +85,13 @@ print_info() {
 	printInfo "$1" "${2:-}"
 }
 
+# @func speakInfo %% <info> %% 💬  Speak and print an informational message to the console 🖥
 speakInfo() {
 	speak "$1"
 	printInfo "$1" "${2:-}"
 }
 
+# @func printInfo %% <info> %% 🖥  Print an informational message to the console
 printSuccess() {
 	echo -e "${COLOR_GREEN}${1}${COLOR_NC}${2:-}"
 }
@@ -143,4 +149,14 @@ printUsage() {
 	echo "Usage:"
 	echo "  harpoon <command> [<arg>...]"
 	echo "  harpoon -h|--help"
+}
+
+printModuleInfo() {
+	if [ -f ${1} ]; then
+		info=$(cat ${1} | head -n 1)
+	else
+		info=""
+	fi
+
+	printf "  %-35s%s\n" "${2}:" "${info}"
 }

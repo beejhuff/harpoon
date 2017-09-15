@@ -29,16 +29,6 @@ projectTasksEnv() {
 	fi
 }
 
-printModuleInfo() {
-	if [ -f ${1} ]; then
-		info=$(cat ${1} | head -n 1)
-	else
-		info=""
-	fi
-
-	printf "  %-35s%s\n" "${2}:" "${info}"
-}
-
 envdoc() {
 	echo -e "\nHarpoon Environment Variables (🔺  = overridable, 🔹  = static):"
 	if [[ "$args" == "" ]]; then printAllEnv; fi
